@@ -15,18 +15,18 @@ import java.util.Properties;
  */
 public class WorkspaceFile
 {
-    private static final String DEFAULT_ROOT = System.getProperty("user.dir");
-    public static final String DEFAULT_WORKSPACE_FILE = WorkspaceFile.DEFAULT_ROOT + File.separator + "data" + File.separator + "workspace.properties";
-    private static String PASSENGERS = "passengers";
-    private static String DEFAULT_PASSENGERS = "rules/passengers.csv";
-    private static String DAYS_TO_DEPARTURE = "daystodeparture";
-    private static String DEFAULT_DAYS_TO_DEPARTURE = "rules/days to departure date.csv";
-    private static String AIRLINES = "airlines";
-    private static String DEFAULT_AIRLINES = "static/airlines.csv";
-    private static String AIRPORTS = "airports";
-    private static String DEFAULT_AIRPORTS = "static/airports.csv";
-    private static String FLIGHTS = "flights";
-    private static String DEFAULT_FLIGHTS = "static/flights.csv";
+            static final String DEFAULT_ROOT = System.getProperty("user.dir");
+    public  static final String DEFAULT_WORKSPACE_FILE = WorkspaceFile.DEFAULT_ROOT + File.separator + "data" + File.separator + "workspace.properties";
+    private static final String PASSENGERS = "passengers";
+            static final String DEFAULT_PASSENGERS = "rules/passengers.csv";
+    private static final String DAYS_TO_DEPARTURE = "daystodeparture";
+            static final String DEFAULT_DAYS_TO_DEPARTURE = "rules/days to departure date.csv";
+    private static final String AIRLINES = "airlines";
+            static final String DEFAULT_AIRLINES = "static/airlines.csv";
+    private static final String AIRPORTS = "airports";
+            static final String DEFAULT_AIRPORTS = "static/airports.csv";
+    private static final String FLIGHTS = "flights";
+            static final String DEFAULT_FLIGHTS = "static/flights.csv";
 
     private String parentdir = "";
     private Properties prop = new Properties();
@@ -42,31 +42,31 @@ public class WorkspaceFile
 
     public String getPassengersPath()
     {
-        return this.parentdir +
+        return this.parentdir + File.separator +
                this.prop.getProperty(WorkspaceFile.PASSENGERS, WorkspaceFile.DEFAULT_PASSENGERS).replace("/", File.separator);
     }
 
     public String getDaysToDeparturePath()
     {
-        return this.parentdir +
+        return this.parentdir + File.separator +
                this.prop.getProperty(WorkspaceFile.DAYS_TO_DEPARTURE, WorkspaceFile.DEFAULT_DAYS_TO_DEPARTURE).replace("/", File.separator);
     }
 
     public String getAirlinesPath()
     {
-        return this.parentdir +
+        return this.parentdir + File.separator +
                this.prop.getProperty(WorkspaceFile.AIRLINES, WorkspaceFile.DEFAULT_AIRLINES).replace("/", File.separator);
     }
 
     public String getAirportsPath()
     {
-        return this.parentdir +
+        return this.parentdir + File.separator +
                this.prop.getProperty(WorkspaceFile.AIRPORTS, WorkspaceFile.DEFAULT_AIRPORTS).replace("/", File.separator);
     }
 
     public String getFlightsPath()
     {
-        return this.parentdir +
+        return this.parentdir + File.separator +
                this.prop.getProperty(WorkspaceFile.FLIGHTS, WorkspaceFile.DEFAULT_FLIGHTS).replace("/", File.separator);
     }
 }
