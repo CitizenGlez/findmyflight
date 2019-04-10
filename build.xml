@@ -73,15 +73,6 @@
             <classpath refid="findmyflight.classpath"/>
         </junit>
     </target>
-    <target name="WorkspaceFileTest.testGetters">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="data.WorkspaceFileTest" todir="${junit.output.dir}"/>
-            <jvmarg line="-ea"/>
-            <classpath refid="findmyflight.classpath"/>
-        </junit>
-    </target>
     <target name="junitreport">
         <junitreport todir="${junit.output.dir}">
             <fileset dir="${junit.output.dir}">
