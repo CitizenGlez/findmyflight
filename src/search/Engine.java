@@ -4,6 +4,7 @@
 package search;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import data.WorkspaceFile;
 
@@ -14,10 +15,18 @@ import data.WorkspaceFile;
 public class Engine implements Runnable
 {
     private String[] args;
+    ConnectionsManager connectionsManager;
+    ArrayList<String> results;
     
     public Engine(String[] args)
     {
         this.args = args;
+        this.results = new ArrayList<String>();
+    }
+    
+    private void parseArguments()
+    {
+        // TODO: do
     }
 
     @Override
@@ -25,18 +34,22 @@ public class Engine implements Runnable
     {
         try
         {
-            WorkspaceFile workspace = new WorkspaceFile(WorkspaceFile.DEFAULT_WORKSPACE_FILE);
+            this.parseArguments();
             
-            System.out.println(workspace.getAirlinesPath());
-            System.out.println(workspace.getAirportsPath());
-            System.out.println(workspace.getDaysToDeparturePath());
-            System.out.println(workspace.getFlightsPath());
-            System.out.println(workspace.getPassengersPath());
+            WorkspaceFile workspace = new WorkspaceFile(WorkspaceFile.DEFAULT_WORKSPACE_FILE);
+            this.connectionsManager = new ConnectionsManager(workspace);
+            
+            this.results.addAll(this.connectionsManager.search());
         }
         catch (IOException e)
         {
             e.printStackTrace();
         }
+    }
+
+    public ArrayList<String> getResults()
+    {
+        return results;
     }
 
     /**
