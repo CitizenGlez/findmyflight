@@ -16,7 +16,7 @@ public class DaysToDeparture extends AbstractObject
     {
         super(line);
         
-        String[] parts = this.line.split(AbstractObject.CSV_DELIMITER);
+        String[] parts = line.trim().split(AbstractObject.CSV_DELIMITER);
         this.minDays = Integer.parseInt(parts[0]);
         this.percentage = Integer.parseInt(parts[1]);
     }
@@ -29,5 +29,11 @@ public class DaysToDeparture extends AbstractObject
     public int getPercentage()
     {
         return percentage;
+    }
+
+    @Override
+    public String toString()
+    {
+        return minDays + "," + percentage;
     }
 }

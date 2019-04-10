@@ -20,7 +20,7 @@ public class Airport extends AbstractObject
     {
         super(line);
         
-        String[] parts = this.line.split(AbstractObject.CSV_DELIMITER);
+        String[] parts = line.trim().split(AbstractObject.CSV_DELIMITER);
         this.iataCode = parts[0];
         this.city = parts[1];
         
@@ -53,5 +53,11 @@ public class Airport extends AbstractObject
             }
         }
         return result;
+    }
+
+    @Override
+    public String toString()
+    {
+        return iataCode + "," + city;
     }
 }

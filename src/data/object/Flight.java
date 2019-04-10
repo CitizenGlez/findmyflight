@@ -4,6 +4,8 @@
 package data.object;
 
 import java.security.InvalidParameterException;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 
 /**
  * @author alvaro
@@ -21,7 +23,7 @@ public class Flight extends AbstractObject
     {
         super(line);
         
-        String[] parts = this.line.split(AbstractObject.CSV_DELIMITER);
+        String[] parts = line.trim().split(AbstractObject.CSV_DELIMITER);
         this.origin = parts[0];
         this.destination = parts[1];
         
@@ -33,7 +35,7 @@ public class Flight extends AbstractObject
         }
         if (alphabeticPos > 0)
         {
-            this.iataCode = code.substring(0, alphabeticPos - 1);
+            this.iataCode = code.substring(0, alphabeticPos);
         }
         else
         {
@@ -47,7 +49,7 @@ public class Flight extends AbstractObject
         }
         if (digitPos > alphabeticPos)
         {
-            this.number = code.substring(alphabeticPos, digitPos - 1);
+            this.number = code.substring(alphabeticPos, digitPos);
         }
         else
         {
@@ -80,6 +82,16 @@ public class Flight extends AbstractObject
     public double getPrice()
     {
         return price;
+    }
+
+    @Override
+    public String toString()
+    {
+        DecimalFormat df = new DecimalFormat("#.00");
+        DecimalFormatSymbols custom = new DecimalFormatSymbols();
+        custom.setDecimalSeparator('.');
+        df.setDecimalFormatSymbols(custom);
+        return origin + "," + destination + "," + iataCode + number + "," + df.format(price);
     }
 
 }
