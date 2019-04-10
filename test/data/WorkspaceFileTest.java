@@ -1,12 +1,19 @@
+/**
+ * 
+ */
 package data;
 
 import java.io.File;
 
 import junit.framework.TestCase;
 
+/**
+ * @author alvaro
+ *
+ */
 public class WorkspaceFileTest extends TestCase
 {
-    private WorkspaceFile workspace;
+    WorkspaceFile workspace;
 
     protected void setUp() throws Exception
     {
@@ -15,23 +22,54 @@ public class WorkspaceFileTest extends TestCase
         this.workspace = new WorkspaceFile(WorkspaceFile.DEFAULT_WORKSPACE_FILE);
     }
 
-    public void testGetters() throws Exception
+    protected void tearDown() throws Exception
     {
-        assertEquals(this.workspace.getAirlinesPath(),
-                     WorkspaceFile.DEFAULT_ROOT + File.separator + "data" + File.separator + WorkspaceFile.DEFAULT_AIRLINES.replace("/", File.separator));
-        assertEquals(this.workspace.getAirportsPath(),
-                     WorkspaceFile.DEFAULT_ROOT + File.separator + "data" + File.separator + WorkspaceFile.DEFAULT_AIRPORTS.replace("/", File.separator));
-        assertEquals(this.workspace.getDaysToDeparturePath(),
-                     WorkspaceFile.DEFAULT_ROOT + File.separator + "data" + File.separator + WorkspaceFile.DEFAULT_DAYS_TO_DEPARTURE.replace("/", File.separator));
-        assertEquals(this.workspace.getFlightsPath(),
-                     WorkspaceFile.DEFAULT_ROOT + File.separator + "data" + File.separator + WorkspaceFile.DEFAULT_FLIGHTS.replace("/", File.separator));
+        super.tearDown();
+    }
+
+    /**
+     * Test method for {@link data.WorkspaceFile#getPassengersPath()}.
+     */
+    public void testGetPassengersPath()
+    {
         assertEquals(this.workspace.getPassengersPath(),
                      WorkspaceFile.DEFAULT_ROOT + File.separator + "data" + File.separator + WorkspaceFile.DEFAULT_PASSENGERS.replace("/", File.separator));
     }
 
-    protected void tearDown() throws Exception
+    /**
+     * Test method for {@link data.WorkspaceFile#getDaysToDeparturePath()}.
+     */
+    public void testGetDaysToDeparturePath()
     {
-        super.tearDown();
+        assertEquals(this.workspace.getDaysToDeparturePath(),
+                     WorkspaceFile.DEFAULT_ROOT + File.separator + "data" + File.separator + WorkspaceFile.DEFAULT_DAYS_TO_DEPARTURE.replace("/", File.separator));
+    }
+
+    /**
+     * Test method for {@link data.WorkspaceFile#getAirlinesPath()}.
+     */
+    public void testGetAirlinesPath()
+    {
+        assertEquals(this.workspace.getAirlinesPath(),
+                     WorkspaceFile.DEFAULT_ROOT + File.separator + "data" + File.separator + WorkspaceFile.DEFAULT_AIRLINES.replace("/", File.separator));
+    }
+
+    /**
+     * Test method for {@link data.WorkspaceFile#getAirportsPath()}.
+     */
+    public void testGetAirportsPath()
+    {
+        assertEquals(this.workspace.getAirportsPath(),
+                     WorkspaceFile.DEFAULT_ROOT + File.separator + "data" + File.separator + WorkspaceFile.DEFAULT_AIRPORTS.replace("/", File.separator));
+    }
+
+    /**
+     * Test method for {@link data.WorkspaceFile#getFlightsPath()}.
+     */
+    public void testGetFlightsPath()
+    {
+        assertEquals(this.workspace.getFlightsPath(),
+                     WorkspaceFile.DEFAULT_ROOT + File.separator + "data" + File.separator + WorkspaceFile.DEFAULT_FLIGHTS.replace("/", File.separator));
     }
 
 }

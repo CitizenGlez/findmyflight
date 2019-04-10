@@ -68,9 +68,11 @@ public class ConnectionsManager implements Observer
 
     public ArrayList<String> search()
     {
-        // TODO Auto-generated method stub
+        ArrayList<String> result = new ArrayList<String>();
         
-        return null;
+        // TODO: do
+        
+        return result;
     }
 
 }
