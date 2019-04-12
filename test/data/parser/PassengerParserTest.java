@@ -22,7 +22,7 @@ public class PassengerParserTest extends TestCase
     {
         super.setUp();
         
-        this.workspace = new WorkspaceFile(WorkspaceFile.DEFAULT_WORKSPACE_FILE);
+        this.workspace = new WorkspaceFile();
         this.passengerParser = new PassengerParser(this.workspace.getPassengersPath());
     }
 

@@ -66,7 +66,7 @@ public class ConnectionsManager implements Observer
         }
     }
 
-    public ArrayList<String> search()
+    public ArrayList<String> search(String query)
     {
         ArrayList<String> result = new ArrayList<String>();
         

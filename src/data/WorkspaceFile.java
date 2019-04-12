@@ -31,6 +31,11 @@ public class WorkspaceFile
     private String parentdir = "";
     private Properties prop = new Properties();
     
+    public WorkspaceFile() throws IOException
+    {
+        this(WorkspaceFile.DEFAULT_WORKSPACE_FILE);
+    }
+    
     public WorkspaceFile(String filepath) throws IOException
     {
         File file = new File(filepath);

@@ -25,7 +25,7 @@ public class FlightParserTest extends TestCase implements Observer
     {
         super.setUp();
         
-        this.workspace = new WorkspaceFile(WorkspaceFile.DEFAULT_WORKSPACE_FILE);
+        this.workspace = new WorkspaceFile();
         this.flightParser = new FlightParser(this.workspace.getFlightsPath());
         this.flightParser.addObserver(this);
         this.flights = new ArrayList<Flight>();

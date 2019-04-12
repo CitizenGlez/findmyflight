@@ -22,7 +22,7 @@ public class DaysToDepartureParserTest extends TestCase
     {
         super.setUp();
         
-        this.workspace = new WorkspaceFile(WorkspaceFile.DEFAULT_WORKSPACE_FILE);
+        this.workspace = new WorkspaceFile();
         this.daysToDepartureParser = new DaysToDepartureParser(this.workspace.getDaysToDeparturePath());
     }
 

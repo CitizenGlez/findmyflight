@@ -36,10 +36,9 @@ public class Engine implements Runnable
         {
             this.parseArguments();
             
-            WorkspaceFile workspace = new WorkspaceFile(WorkspaceFile.DEFAULT_WORKSPACE_FILE);
-            this.connectionsManager = new ConnectionsManager(workspace);
+            this.connectionsManager = new ConnectionsManager(new WorkspaceFile());
             
-            this.results.addAll(this.connectionsManager.search());
+            this.results.addAll(this.connectionsManager.search(args[0]));
         }
         catch (IOException e)
         {

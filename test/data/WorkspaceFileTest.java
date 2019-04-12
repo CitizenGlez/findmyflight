@@ -19,7 +19,7 @@ public class WorkspaceFileTest extends TestCase
     {
         super.setUp();
         
-        this.workspace = new WorkspaceFile(WorkspaceFile.DEFAULT_WORKSPACE_FILE);
+        this.workspace = new WorkspaceFile();
     }
 
     protected void tearDown() throws Exception

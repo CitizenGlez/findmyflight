@@ -22,7 +22,7 @@ public class AirlineParserTest extends TestCase
     {
         super.setUp();
         
-        this.workspace = new WorkspaceFile(WorkspaceFile.DEFAULT_WORKSPACE_FILE);
+        this.workspace = new WorkspaceFile();
         this.airlineParser = new AirlineParser(this.workspace.getAirlinesPath());
     }
 
