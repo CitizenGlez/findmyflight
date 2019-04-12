@@ -19,6 +19,7 @@ public class Arguments
     private static final String INFANT = "infant";
     private static final String DAY = "to the departure date";
     private static final String FLYING = "flying";
+    private static final String ARROW = "->";
     
     int adults;
     int children;
@@ -31,6 +32,7 @@ public class Arguments
     // 1 adult, 31 days to the departure date, flying AMS -> FRA
     // 2 adults, 1 child, 1 infant, 15 days to the departure date, flying LHR -> IST
     // 1 adult, 2 children, 2 days to the departure date, flying BCN -> MAD
+    // CDG -> FRA
     public Arguments(String query) throws ParseException, InvalidParameterException
     {
         // Split the query into comma separated elements
@@ -74,22 +76,24 @@ public class Arguments
                         throw new InvalidParameterException("The number of days to departure date may not be negative");
                     }
                 }
-                else if (token.toLowerCase().contains(Arguments.FLYING))
+                else if (token.toLowerCase().contains(Arguments.ARROW))
                 {
+                    String trip;
                     String trimmedToken = token.trim();
                     if (trimmedToken.toLowerCase().startsWith(Arguments.FLYING))
                     {
-                        String trip = trimmedToken.substring(Arguments.FLYING.length()).trim();
-                        String[] airports = trip.split("->");
-                        if (airports.length == 2)
-                        {
-                            this.origin = airports[0].trim().toUpperCase();
-                            this.destination = airports[1].trim().toUpperCase();
-                        }
-                        else
-                        {
-                            throw new ParseException("Wrong token has been found: \"" + token + "\"", tokenpos);
-                        }
+                        trip = trimmedToken.substring(Arguments.FLYING.length()).trim();
+                    }
+                    else
+                    {
+                        trip = trimmedToken;
+                    }
+                    
+                    String[] airports = trip.split(Arguments.ARROW);
+                    if (airports.length == 2)
+                    {
+                        this.origin = airports[0].trim().toUpperCase();
+                        this.destination = airports[1].trim().toUpperCase();
                     }
                     else
                     {
@@ -103,8 +107,18 @@ public class Arguments
             }
             catch (Exception e)
             {
-                throw e;  // We rethrow in order to avoid leaking the Scanner
+                throw e;  // We rethrow what we have thrown. The only reason of this try-catch is to avoid leaking the Scanner
             }
+        }
+        
+        // If there is no information about the number of passengers, we assume 1 adult
+        if ((this.adults == 0) && (this.children == 0) && (this.infants == 0) && (this.origin != null) && (this.destination != null))
+        {
+            this.adults = 1;
+        }
+        else if ((this.origin == null) || (this.destination == null))
+        {
+            throw new ParseException("No origin or destination information has been provided", query.length());
         }
     }
 

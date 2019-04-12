@@ -21,6 +21,8 @@ import data.parser.DaysToDepartureParser;
 import data.parser.FlightParser;
 import data.parser.PassengerParser;
 import search.arg.Arguments;
+import search.exception.DestinationNotFoundException;
+import search.exception.OriginNotFoundException;
 
 /**
  * @author alvaro
@@ -67,11 +69,28 @@ public class ConnectionsManager implements Observer
         }
     }
 
-    public ArrayList<String> search(Arguments arguments)
+    public ArrayList<String> search(Arguments arguments) throws OriginNotFoundException, DestinationNotFoundException
     {
         ArrayList<String> result = new ArrayList<String>();
         
-        // TODO: do
+        if (this.airports.containsKey(arguments.getOrigin()))
+        {
+            Airport origin = this.airports.get(arguments.getOrigin());
+            ArrayList<Flight> connections = origin.getConnections(arguments.getDestination());
+            
+            if (!connections.isEmpty())
+            {
+                
+            }
+            else
+            {
+                throw new DestinationNotFoundException(arguments.getOrigin(), arguments.getDestination());
+            }
+        }
+        else
+        {
+            throw new OriginNotFoundException(arguments.getOrigin());
+        }
         
         return result;
     }

@@ -11,7 +11,7 @@ import junit.framework.TestCase;
  */
 public class ArgumentsTest extends TestCase
 {
-    Arguments case1, case2, case3;
+    Arguments case1, case2, case3, case4;
 
     protected void setUp() throws Exception
     {
@@ -20,6 +20,7 @@ public class ArgumentsTest extends TestCase
         this.case1 = new Arguments("1 adult, 31 days to the departure date, flying AMS -> FRA");
         this.case2 = new Arguments("2 adults, 1 child, 1 infant, 15 days to the departure date, flying LHR -> IST");
         this.case3 = new Arguments("1 adult, 2 children, 2 days to the departure date, flying BCN -> MAD");
+        this.case4 = new Arguments("CDG -> FRA");
     }
 
     protected void tearDown() throws Exception
@@ -35,6 +36,7 @@ public class ArgumentsTest extends TestCase
         assertEquals(1, this.case1.getAdults());
         assertEquals(2, this.case2.getAdults());
         assertEquals(1, this.case3.getAdults());
+        assertEquals(1, this.case4.getAdults());
     }
 
     /**
@@ -45,6 +47,7 @@ public class ArgumentsTest extends TestCase
         assertEquals(0, this.case1.getChildren());
         assertEquals(1, this.case2.getChildren());
         assertEquals(2, this.case3.getChildren());
+        assertEquals(0, this.case4.getChildren());
     }
 
     /**
@@ -55,6 +58,7 @@ public class ArgumentsTest extends TestCase
         assertEquals(0, this.case1.getInfants());
         assertEquals(1, this.case2.getInfants());
         assertEquals(0, this.case3.getInfants());
+        assertEquals(0, this.case4.getInfants());
     }
 
     /**
@@ -65,6 +69,7 @@ public class ArgumentsTest extends TestCase
         assertEquals(31, this.case1.getDaysToDeparture());
         assertEquals(15, this.case2.getDaysToDeparture());
         assertEquals(2, this.case3.getDaysToDeparture());
+        assertEquals(0, this.case4.getDaysToDeparture());
     }
 
     /**
@@ -75,6 +80,7 @@ public class ArgumentsTest extends TestCase
         assertEquals("AMS", this.case1.getOrigin());
         assertEquals("LHR", this.case2.getOrigin());
         assertEquals("BCN", this.case3.getOrigin());
+        assertEquals("CDG", this.case4.getOrigin());
     }
 
     /**
@@ -85,6 +91,7 @@ public class ArgumentsTest extends TestCase
         assertEquals("FRA", this.case1.getDestination());
         assertEquals("IST", this.case2.getDestination());
         assertEquals("MAD", this.case3.getDestination());
+        assertEquals("FRA", this.case4.getDestination());
     }
 
 }
