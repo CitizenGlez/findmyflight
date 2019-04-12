@@ -5,6 +5,7 @@ package search;
 
 import java.io.IOException;
 import java.security.InvalidParameterException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import data.WorkspaceFile;
@@ -45,6 +46,10 @@ public class Engine implements Runnable
             }
         }
         catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        catch (ParseException e)
         {
             e.printStackTrace();
         }

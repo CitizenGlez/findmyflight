@@ -16,15 +16,15 @@ public class ArgumentsTest extends TestCase
     protected void setUp() throws Exception
     {
         super.setUp();
+
+        this.case1 = new Arguments("1 adult, 31 days to the departure date, flying AMS -> FRA");
+        this.case2 = new Arguments("2 adults, 1 child, 1 infant, 15 days to the departure date, flying LHR -> IST");
+        this.case3 = new Arguments("1 adult, 2 children, 2 days to the departure date, flying BCN -> MAD");
     }
 
     protected void tearDown() throws Exception
     {
         super.tearDown();
-
-        this.case1 = new Arguments("1 adult, 31 days to the departure date, flying AMS -> FRA");
-        this.case2 = new Arguments("2 adults, 1 child, 1 infant, 15 days to the departure date, flying LHR -> IST");
-        this.case3 = new Arguments("1 adult, 2 children, 2 days to the departure date, flying BCN -> MAD");
     }
 
     /**
