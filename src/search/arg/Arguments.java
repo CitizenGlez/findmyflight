@@ -120,6 +120,10 @@ public class Arguments
         {
             throw new ParseException("No origin or destination information has been provided", query.length());
         }
+        else if (this.adults == 0)
+        {
+            throw new InvalidParameterException("Children and infants cannot travel without at least one adult");
+        }
     }
 
     public int getAdults()

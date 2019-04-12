@@ -4,8 +4,11 @@
 package search;
 
 import java.io.FileNotFoundException;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -80,7 +83,10 @@ public class ConnectionsManager implements Observer
             
             if (!connections.isEmpty())
             {
-                
+                for (Flight flight : connections)
+                {
+                    result.add(this.calculatePrice(flight, arguments));
+                }
             }
             else
             {
@@ -90,6 +96,88 @@ public class ConnectionsManager implements Observer
         else
         {
             throw new OriginNotFoundException(arguments.getOrigin());
+        }
+        
+        return result;
+    }
+
+    private String calculatePrice(Flight flight, Arguments arguments)
+    {
+        String result = flight.getNumber();
+        String moreInfo = "";
+        DecimalFormat df = new DecimalFormat("#.##");
+        DecimalFormatSymbols custom = new DecimalFormatSymbols();
+        custom.setDecimalSeparator('.');
+        df.setDecimalFormatSymbols(custom);
+        
+        // The numbers
+        int generalPercentaje = getPercentajeBasedOnDaysToDeparture(arguments.getDaysToDeparture());
+        int childrenPercentaje = this.passengers.get(Passenger.CHILD).getPercentage();
+        double infantPrice = this.airlines.get(flight.getIataCode()).getInfantPrice();
+        
+        // The price
+        double price = (arguments.getAdults()   * (generalPercentaje / 100.0)                                * flight.getPrice())
+                     + (arguments.getChildren() * (generalPercentaje / 100.0) * (childrenPercentaje / 100.0) * flight.getPrice())
+                     + (arguments.getInfants()                                                               * infantPrice);
+        
+        // The more info
+        if ((arguments.getAdults() > 1) || (arguments.getChildren() > 0) || (arguments.getInfants() > 0))
+        {
+            String grossPrice = df.format(flight.getPrice());
+            
+            if (arguments.getAdults() == 1)
+            {
+                moreInfo += generalPercentaje + "% of " + grossPrice;
+            }
+            else if (arguments.getAdults() > 1)
+            {
+                moreInfo += arguments.getAdults() + " * (" + generalPercentaje + "% of " + grossPrice + ")";
+            }
+
+            if (arguments.getChildren() == 1)
+            {
+                moreInfo += " + " + childrenPercentaje  + "% of (" + generalPercentaje + "% of " + grossPrice + ")";
+            }
+            else if (arguments.getChildren() > 1)
+            {
+                moreInfo += " + " + arguments.getChildren() + " * " + childrenPercentaje  + "% of (" + generalPercentaje + "% of " + grossPrice + ")";
+            }
+
+            if (arguments.getInfants() == 1)
+            {
+                moreInfo += " + " + df.format(infantPrice);
+            }
+            else if (arguments.getInfants() > 1)
+            {
+                moreInfo += " + " + arguments.getInfants() + " * " + df.format(infantPrice);
+            }
+        }
+        
+        // Append price
+        result += ", " + df.format(price) + " €";
+        
+        // Append more info
+        if (!moreInfo.isEmpty())
+        {
+            result += " (" + moreInfo + ")";
+        }
+        return result;
+    }
+
+    private int getPercentajeBasedOnDaysToDeparture(int days)
+    {
+        int result = 0;
+        
+        boolean found = false;
+        Iterator<DaysToDeparture> it = this.daysToDeparture.iterator();
+        while (it.hasNext() && !found)
+        {
+            DaysToDeparture daysToDeparture = (DaysToDeparture) it.next();
+            if (daysToDeparture.getMinDays() <= days)
+            {
+                found = true;
+                result = daysToDeparture.getPercentage();
+            }
         }
         
         return result;

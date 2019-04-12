@@ -47,7 +47,7 @@ public class Airport extends AbstractObject
         ArrayList<Flight> result = new ArrayList<Flight>();
         for (Flight flight : this.connections)
         {
-            if (flight.getDestination() == destination)
+            if (flight.getDestination().equals(destination))
             {
                 result.add(flight);
             }

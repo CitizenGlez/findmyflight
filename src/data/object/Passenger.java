@@ -9,6 +9,8 @@ package data.object;
  */
 public class Passenger extends AbstractObject
 {
+    public static final String CHILD = "child";
+    
     private String type;
     private int percentage;
     
