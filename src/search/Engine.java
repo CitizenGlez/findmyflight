@@ -4,9 +4,11 @@
 package search;
 
 import java.io.IOException;
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 
 import data.WorkspaceFile;
+import search.arg.Arguments;
 
 /**
  * @author agz3
@@ -23,22 +25,24 @@ public class Engine implements Runnable
         this.args = args;
         this.results = new ArrayList<String>();
     }
-    
-    private void parseArguments()
-    {
-        // TODO: do
-    }
 
     @Override
     public void run()
     {
         try
         {
-            this.parseArguments();
-            
-            this.connectionsManager = new ConnectionsManager(new WorkspaceFile());
-            
-            this.results.addAll(this.connectionsManager.search(args[0]));
+            if (this.args.length >= 1)
+            {
+                Arguments arguments = new Arguments(args[1]);
+                
+                this.connectionsManager = new ConnectionsManager(new WorkspaceFile());
+                
+                this.results.addAll(this.connectionsManager.search(arguments));
+            }
+            else
+            {
+                throw new InvalidParameterException("Insufficient number of arguments provided");
+            }
         }
         catch (IOException e)
         {

@@ -20,6 +20,7 @@ import data.parser.AirportParser;
 import data.parser.DaysToDepartureParser;
 import data.parser.FlightParser;
 import data.parser.PassengerParser;
+import search.arg.Arguments;
 
 /**
  * @author alvaro
@@ -66,7 +67,7 @@ public class ConnectionsManager implements Observer
         }
     }
 
-    public ArrayList<String> search(String query)
+    public ArrayList<String> search(Arguments arguments)
     {
         ArrayList<String> result = new ArrayList<String>();
         
