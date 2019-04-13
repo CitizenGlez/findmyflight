@@ -4,6 +4,7 @@
 package data;
 
 import java.io.File;
+import java.io.IOException;
 
 import junit.framework.TestCase;
 
@@ -25,6 +26,19 @@ public class WorkspaceFileTest extends TestCase
     protected void tearDown() throws Exception
     {
         super.tearDown();
+    }
+    
+    public void testFileNotFound()
+    {
+        try
+        {
+            @SuppressWarnings("unused")
+            WorkspaceFile invalidworkspace = new WorkspaceFile("unexistent location");
+        }
+        catch (IOException e)
+        {
+            assertEquals("unexistent location (The system cannot find the file specified)", e.getMessage());
+        }
     }
 
     /**

@@ -69,12 +69,32 @@ public class ConnectionsManagerTest extends TestCase
         
         try
         {
-            Arguments case4 = new Arguments("CDG -> FRA");
-            this.connectionsManager.search(case4);
+            Arguments negativeCase = new Arguments("ABC -> FRA");
+            this.connectionsManager.search(negativeCase);
+            fail("This test case should have thrown an exception");
         }
-        catch (ParseException | OriginNotFoundException | DestinationNotFoundException e)
+        catch (OriginNotFoundException e)
+        {
+            assertEquals("ABC is not an available airport", e.getMessage());
+        }
+        catch (ParseException | DestinationNotFoundException e)
+        {
+            fail("An exception has been thrown: " + e.getMessage());
+        }
+        
+        try
+        {
+            Arguments negativeCase = new Arguments("CDG -> FRA");
+            this.connectionsManager.search(negativeCase);
+            fail("This test case should have thrown an exception");
+        }
+        catch (DestinationNotFoundException e)
         {
             assertEquals("FRA is not an available destination from CDG", e.getMessage());
+        }
+        catch (ParseException | OriginNotFoundException e)
+        {
+            fail("An exception has been thrown: " + e.getMessage());
         }
     }
 

@@ -87,6 +87,8 @@ public class Arguments
                 {
                     String trip;
                     String trimmedToken = token.trim();
+                    
+                    // Remove the flying part
                     if (trimmedToken.toLowerCase().startsWith(Arguments.FLYING))
                     {
                         trip = trimmedToken.substring(Arguments.FLYING.length()).trim();
