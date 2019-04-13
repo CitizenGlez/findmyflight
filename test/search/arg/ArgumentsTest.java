@@ -6,7 +6,7 @@ package search.arg;
 import junit.framework.TestCase;
 
 /**
- * @author AGZ3
+ * @author alvaro
  *
  */
 public class ArgumentsTest extends TestCase

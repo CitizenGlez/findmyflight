@@ -37,11 +37,11 @@ public class FlightParserTest extends TestCase implements Observer
     }
 
     /**
-     * Test method for {@link data.parser.FlightParser#Parse()}.
+     * Test method for {@link data.parser.FlightParser#parse()}.
      */
     public void testParse()
     {
-        this.flightParser.Parse();
+        this.flightParser.parse();
         assertEquals(this.flights.size(), 89);
         assertEquals("CPH,FRA,IB2818,186.00", flights.get(0).toString());
         assertEquals("CPH,LHR,U23631,152.00", flights.get(1).toString());

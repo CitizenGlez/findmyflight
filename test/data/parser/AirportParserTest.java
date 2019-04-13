@@ -32,11 +32,11 @@ public class AirportParserTest extends TestCase
     }
 
     /**
-     * Test method for {@link data.parser.AirportParser#Parse()}.
+     * Test method for {@link data.parser.AirportParser#parse()}.
      */
     public void testParse()
     {
-        HashMap<String, Airport> airports = this.airportParser.Parse();
+        HashMap<String, Airport> airports = this.airportParser.parse();
         assertEquals(airports.size(), 9);
         assertEquals("MAD,Madrid", airports.get("MAD").toString());
         assertEquals("BCN,Barcelona", airports.get("BCN").toString());

@@ -6,7 +6,7 @@ package search.exception;
 import java.io.FileNotFoundException;
 
 /**
- * @author AGZ3
+ * @author alvaro
  *
  */
 public class DestinationNotFoundException extends FileNotFoundException

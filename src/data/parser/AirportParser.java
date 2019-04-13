@@ -13,6 +13,7 @@ import java.util.HashMap;
 import data.object.Airport;
 
 /**
+ * Parser of a .csv file that contains the airports data.
  * @author alvaro
  *
  */
@@ -28,7 +29,11 @@ public class AirportParser extends AbstractParser
         super(path);
     }
 
-    public HashMap<String, Airport> Parse()
+    /**
+     * Parses the .csv file.
+     * @return A hashmap of Airport instances
+     */
+    public HashMap<String, Airport> parse()
     {
         HashMap<String, Airport> result = new HashMap<String, Airport>();
         String line = "";

@@ -28,8 +28,8 @@ import search.exception.DestinationNotFoundException;
 import search.exception.OriginNotFoundException;
 
 /**
+ * This class contains all the data contained within the files referenced in the workspace file, and provides a flight search interface.
  * @author alvaro
- *
  */
 public class ConnectionsManager implements Observer
 {
@@ -39,39 +39,51 @@ public class ConnectionsManager implements Observer
     ArrayList<DaysToDeparture> daysToDeparture;
 
     /**
-     * @throws FileNotFoundException 
-     * 
+     * Parses all the contents of the .csv files referenced in the workspace file.
+     * @param workspace
+     * @throws FileNotFoundException
      */
     public ConnectionsManager(WorkspaceFile workspace) throws FileNotFoundException
     {
         AirlineParser airlineParser = new AirlineParser(workspace.getAirlinesPath());
-        this.airlines = airlineParser.Parse();
+        this.airlines = airlineParser.parse();
         
         PassengerParser passengerParser = new PassengerParser(workspace.getPassengersPath());
-        this.passengers = passengerParser.Parse();
+        this.passengers = passengerParser.parse();
         
         DaysToDepartureParser daysToDepartureParser = new DaysToDepartureParser(workspace.getDaysToDeparturePath());
-        this.daysToDeparture = daysToDepartureParser.Parse();
+        this.daysToDeparture = daysToDepartureParser.parse();
         
         AirportParser airportParser = new AirportParser(workspace.getAirportsPath());
-        this.airports = airportParser.Parse();
+        this.airports = airportParser.parse();
         
         FlightParser flightParser = new FlightParser(workspace.getFlightsPath());
-        flightParser.addObserver(this);
-        flightParser.Parse();
+        flightParser.addObserver(this);  // We observer the flight parser
+        flightParser.parse();
     }
 
+    /**
+     * This is what we do when we receive an update notification from the flight parser.
+     */
     @Override
     public void update(Observable o, Object arg)
     {
         if (arg instanceof Flight)
         {
+            // A new flight has been discovered, and we add it to the airport where it departs from
             Flight flight = (Flight) arg;
             Airport airport = airports.get(flight.getOrigin());
             airport.addConnection(flight);
         }
     }
 
+    /**
+     * Searches all the flights between two given airports, for the amount of adults, children and infants to fly within a given number of days prior to the departure date.
+     * @param arguments
+     * @return A list of strings, each of them describing a flight search result
+     * @throws OriginNotFoundException
+     * @throws DestinationNotFoundException
+     */
     public ArrayList<String> search(Arguments arguments) throws OriginNotFoundException, DestinationNotFoundException
     {
         ArrayList<String> result = new ArrayList<String>();
@@ -101,6 +113,12 @@ public class ConnectionsManager implements Observer
         return result;
     }
 
+    /**
+     * Calculates the price of a flight according to the given arguments and the pricing rules.
+     * @param flight
+     * @param arguments
+     * @return A string containing the flight number, price in euros and description of how the price has been calculated according to the pricing rules
+     */
     private String calculatePrice(Flight flight, Arguments arguments)
     {
         String result = flight.getNumber();
@@ -164,10 +182,16 @@ public class ConnectionsManager implements Observer
         return result;
     }
 
+    /**
+     * Calculates the percentaje of the base price to pay, according to the days to departure date rule.
+     * @param days
+     * @return Percentaje of the base price to pay, according to the days to departure date rule
+     */
     private int getPercentajeBasedOnDaysToDeparture(int days)
     {
         int result = 0;
         
+        // The list is already sorted from the highest to the lowest days, so we just iterate
         boolean found = false;
         Iterator<DaysToDeparture> it = this.daysToDeparture.iterator();
         while (it.hasNext() && !found)

@@ -8,7 +8,8 @@ import java.text.ParseException;
 import java.util.Scanner;
 
 /**
- * @author AGZ3
+ * Contains all the arguments used in a flight search.
+ * @author alvaro
  *
  */
 public class Arguments
@@ -28,11 +29,17 @@ public class Arguments
     String origin;
     String destination;
     
-    // This constructor accepts queries like:
-    // 1 adult, 31 days to the departure date, flying AMS -> FRA
-    // 2 adults, 1 child, 1 infant, 15 days to the departure date, flying LHR -> IST
-    // 1 adult, 2 children, 2 days to the departure date, flying BCN -> MAD
-    // CDG -> FRA
+    /**
+     * Parses a query containing a description of a flight search into very specific arguments to be used later on.
+     * This constructor accepts queries like:
+     * "1 adult, 31 days to the departure date, flying AMS -> FRA"
+     * "2 adults, 1 child, 1 infant, 15 days to the departure date, flying LHR -> IST"
+     * "1 adult, 2 children, 2 days to the departure date, flying BCN -> MAD"
+     * "CDG -> FRA"
+     * @param query
+     * @throws ParseException
+     * @throws InvalidParameterException
+     */
     public Arguments(String query) throws ParseException, InvalidParameterException
     {
         // Split the query into comma separated elements
@@ -107,7 +114,7 @@ public class Arguments
             }
             catch (Exception e)
             {
-                throw e;  // We rethrow what we have thrown. The only reason of this try-catch is to avoid leaking the Scanner
+                throw e;  // We rethrow what we have caught. The only reason of this try-catch is to avoid leaking the Scanner
             }
         }
         

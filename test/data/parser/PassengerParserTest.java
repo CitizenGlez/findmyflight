@@ -32,11 +32,11 @@ public class PassengerParserTest extends TestCase
     }
 
     /**
-     * Test method for {@link data.parser.PassengerParser#Parse()}.
+     * Test method for {@link data.parser.PassengerParser#parse()}.
      */
     public void testParse()
     {
-        HashMap<String, Passenger> passengers = this.passengerParser.Parse();
+        HashMap<String, Passenger> passengers = this.passengerParser.parse();
         assertEquals(passengers.size(), 3);
         assertEquals("adult,100", passengers.get("adult").toString());
         assertEquals("child,67", passengers.get("child").toString());

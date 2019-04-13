@@ -32,11 +32,11 @@ public class AirlineParserTest extends TestCase
     }
 
     /**
-     * Test method for {@link data.parser.AirlineParser#Parse()}.
+     * Test method for {@link data.parser.AirlineParser#parse()}.
      */
     public void testParse()
     {
-        HashMap<String, Airline> airlines = this.airlineParser.Parse();
+        HashMap<String, Airline> airlines = this.airlineParser.parse();
         assertEquals(7, airlines.size());
         assertEquals("IB,Iberia,10.00", airlines.get("IB").toString());
         assertEquals("BA,British Airways,15.00", airlines.get("BA").toString());

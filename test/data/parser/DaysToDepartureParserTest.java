@@ -32,11 +32,11 @@ public class DaysToDepartureParserTest extends TestCase
     }
 
     /**
-     * Test method for {@link data.parser.DaysToDepartureParser#Parse()}.
+     * Test method for {@link data.parser.DaysToDepartureParser#parse()}.
      */
     public void testParse()
     {
-        ArrayList<DaysToDeparture> days = this.daysToDepartureParser.Parse();
+        ArrayList<DaysToDeparture> days = this.daysToDepartureParser.parse();
         assertEquals(days.size(), 4);
         assertEquals("31,80", days.get(0).toString());
         assertEquals("16,100", days.get(1).toString());

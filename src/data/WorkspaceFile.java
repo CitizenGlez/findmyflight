@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
+ * A workspace file is a properties file that contains the relative location of other files.
  * @author alvaro
  *
  */
@@ -29,49 +30,58 @@ public class WorkspaceFile
             static final String DEFAULT_FLIGHTS = "static/flights.csv";
 
     private String parentdir = "";
-    private Properties prop = new Properties();
+    private Properties properties = new Properties();
     
+    /**
+     * Loads the properties contained in a default file.
+     * @throws IOException
+     */
     public WorkspaceFile() throws IOException
     {
         this(WorkspaceFile.DEFAULT_WORKSPACE_FILE);
     }
     
+    /**
+     * Loads the properties contained in a given file.
+     * @param filepath
+     * @throws IOException
+     */
     public WorkspaceFile(String filepath) throws IOException
     {
         File file = new File(filepath);
         this.parentdir = file.getParent();
         
         InputStream input = new FileInputStream(filepath);
-        this.prop.load(input);
+        this.properties.load(input);
     }
 
     public String getPassengersPath()
     {
         return this.parentdir + File.separator +
-               this.prop.getProperty(WorkspaceFile.PASSENGERS, WorkspaceFile.DEFAULT_PASSENGERS).replace("/", File.separator);
+               this.properties.getProperty(WorkspaceFile.PASSENGERS, WorkspaceFile.DEFAULT_PASSENGERS).replace("/", File.separator);
     }
 
     public String getDaysToDeparturePath()
     {
         return this.parentdir + File.separator +
-               this.prop.getProperty(WorkspaceFile.DAYS_TO_DEPARTURE, WorkspaceFile.DEFAULT_DAYS_TO_DEPARTURE).replace("/", File.separator);
+               this.properties.getProperty(WorkspaceFile.DAYS_TO_DEPARTURE, WorkspaceFile.DEFAULT_DAYS_TO_DEPARTURE).replace("/", File.separator);
     }
 
     public String getAirlinesPath()
     {
         return this.parentdir + File.separator +
-               this.prop.getProperty(WorkspaceFile.AIRLINES, WorkspaceFile.DEFAULT_AIRLINES).replace("/", File.separator);
+               this.properties.getProperty(WorkspaceFile.AIRLINES, WorkspaceFile.DEFAULT_AIRLINES).replace("/", File.separator);
     }
 
     public String getAirportsPath()
     {
         return this.parentdir + File.separator +
-               this.prop.getProperty(WorkspaceFile.AIRPORTS, WorkspaceFile.DEFAULT_AIRPORTS).replace("/", File.separator);
+               this.properties.getProperty(WorkspaceFile.AIRPORTS, WorkspaceFile.DEFAULT_AIRPORTS).replace("/", File.separator);
     }
 
     public String getFlightsPath()
     {
         return this.parentdir + File.separator +
-               this.prop.getProperty(WorkspaceFile.FLIGHTS, WorkspaceFile.DEFAULT_FLIGHTS).replace("/", File.separator);
+               this.properties.getProperty(WorkspaceFile.FLIGHTS, WorkspaceFile.DEFAULT_FLIGHTS).replace("/", File.separator);
     }
 }

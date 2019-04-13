@@ -14,6 +14,7 @@ import java.util.Observable;
 import data.object.Flight;
 
 /**
+ * Parser of a .csv file that contains the flights data.
  * @author alvaro
  *
  */
@@ -36,7 +37,10 @@ public class FlightParser extends Observable
         this.path = path;
     }
     
-    public void Parse()
+    /**
+     * Parses the .csv file.
+     */
+    public void parse()
     {
         String line = "";
 

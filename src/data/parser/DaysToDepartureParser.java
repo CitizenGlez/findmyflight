@@ -14,6 +14,7 @@ import java.util.Comparator;
 import data.object.DaysToDeparture;
 
 /**
+ * Parser of a .csv file that contains the days to departure date data.
  * @author alvaro
  *
  */
@@ -29,7 +30,11 @@ public class DaysToDepartureParser extends AbstractParser
         super(path);
     }
     
-    public ArrayList<DaysToDeparture> Parse()
+    /**
+     * Parses the .csv file.
+     * @return A list of DaysToDeparture instances
+     */
+    public ArrayList<DaysToDeparture> parse()
     {
         ArrayList<DaysToDeparture> result = new ArrayList<DaysToDeparture>();
         String line = "";
@@ -42,15 +47,6 @@ public class DaysToDepartureParser extends AbstractParser
                 {
                     DaysToDeparture daysToDeparture = new DaysToDeparture(line);
                     result.add(daysToDeparture);
-                    result.sort(new Comparator<DaysToDeparture>()
-                    {
-                        @Override
-                        public int compare(DaysToDeparture o1, DaysToDeparture o2)
-                        {
-                            // Descending
-                            return o2.getMinDays() - o1.getMinDays();
-                        }
-                    });
                 }
                 catch (InvalidParameterException e)
                 {
@@ -58,6 +54,15 @@ public class DaysToDepartureParser extends AbstractParser
                 }
             }
 
+            // Sort in descending ordering
+            result.sort(new Comparator<DaysToDeparture>()
+            {
+                @Override
+                public int compare(DaysToDeparture o1, DaysToDeparture o2)
+                {
+                    return o2.getMinDays() - o1.getMinDays();
+                }
+            });
         }
         catch (IOException e)
         {

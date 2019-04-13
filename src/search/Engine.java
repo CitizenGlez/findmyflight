@@ -12,8 +12,8 @@ import data.WorkspaceFile;
 import search.arg.Arguments;
 
 /**
- * @author agz3
- *
+ * This is just a sample application for using the ConnectionsManager class.
+ * @author alvaro
  */
 public class Engine implements Runnable
 {
@@ -34,6 +34,7 @@ public class Engine implements Runnable
         {
             if (this.args.length >= 1)
             {
+                // Turn the first argument into proper Arguments, ignore the rest
                 Arguments arguments = new Arguments(args[1]);
                 
                 this.connectionsManager = new ConnectionsManager(new WorkspaceFile());
