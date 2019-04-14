@@ -4,6 +4,7 @@
 package data;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import junit.framework.TestCase;
@@ -37,7 +38,7 @@ public class WorkspaceFileTest extends TestCase
         }
         catch (IOException e)
         {
-            assertEquals("unexistent location (The system cannot find the file specified)", e.getMessage());
+            assertTrue(e instanceof FileNotFoundException);
         }
     }
 
