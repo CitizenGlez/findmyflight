@@ -1,4 +1,4 @@
-# Flight search
+# Flight search (build status: [![Build Status](https://travis-ci.org/CitizenGlez/findmyflight.svg?branch=master)](https://travis-ci.org/CitizenGlez/findmyflight))
 
 ## Problem
 
